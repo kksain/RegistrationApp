@@ -101,7 +101,6 @@
     </ul>
     <h1 class="welcome">Account Activities</h1>
     <ul>
-        <!-- <li><strong>Go to Home:</strong> <a href="{% url 'home' %}">Home</a></li> -->
         {% if user_profile.user_type == 'doctor' %}
         <li><strong>Create a New Blog Post:</strong> <a href="{% url 'create_blog_post' %}">Create Blog Post</a></li>
         <li><strong>Check Your Blog Posts:</strong> <a href="{% url 'doctor_posts' %}">Your Blog Posts</a></li>
