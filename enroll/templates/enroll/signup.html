@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Registration</title>
+    <style>
+        body,
+        h1,
+        p {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #2c3e50;
+            color: #ecf0f1;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #34495e;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .red {
+            color: white;
+            background-color: #e74c3c;
+            padding: 10px;
+            border-radius: 4px;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        /* Style form labels and inputs */
+        form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        form input[type="text"],
+        form input[type="email"],
+        form input[type="password"],
+        form select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+            border: 1px solid #3498db;
+            border-radius: 4px;
+            background-color: #2c3e50;
+            color: #ecf0f1;
+        }
+
+        /* Style submit button */
+        form input[type="submit"] {
+            background-color: #3498db;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        form input[type="submit"]:hover {
+            background-color: #2980b9;
+        }
+
+        /* Style error messages */
+        .er {
+            color: #e74c3c;
+            margin-top: 5px;
+        }
+
+        /* Style success and info messages */
+        small {
+            display: block;
+            margin-top: 5px;
+        }
+
+        .success {
+            color: #2ecc71;
+        }
+
+        .info {
+            color: #3498db;
+        }
+
+        /* Style link at the bottom */
+        p a {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        p a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="red">Registration Form:</h1>
+        <div class="container">
+            <form action="" method="post" enctype="multipart/form-data" novalidate>
+                {% csrf_token %}
+                {% if form.non_field_errors %}
+                {% for error in form.non_field_errors %}
+                <p class="er">{{error}}</p>
+                {% endfor %}
+                {% endif %}
+                {{ user_form.username.label_tag }} {{ user_form.username }}<br><br>
+                {{ user_form.email.label_tag }} {{ user_form.email }}<br><br>
+                {{ user_form.password1.label_tag }} {{ user_form.password1 }}<br><br>
+                {{ user_form.password2.label_tag }} {{ user_form.password2 }}<br><br>
+                {{ user_form.first_name.label_tag }} {{ user_form.first_name }}<br><br>
+                {{ user_form.last_name.label_tag }} {{ user_form.last_name }}<br><br>
+                {{ profile_form.profile_picture.label_tag }} {{ profile_form.profile_picture }}<br><br>
+                {{ profile_form.user_type.label_tag }} {{ profile_form.user_type }}<br><br>
+                {{ profile_form.address_line1.label_tag }} {{ profile_form.address_line1 }}<br><br>
+                {{ profile_form.city.label_tag }} {{ profile_form.city }}<br><br>
+                {{ profile_form.state.label_tag }} {{ profile_form.state }}<br><br>
+                {{ profile_form.pincode.label_tag }} {{ profile_form.pincode }}<br>
+                <input type="submit" value="Submit">
+
+                {% if user_form.errors or profile_form.errors %}
+                <p style="color: red;">There was an error in the form. Please check the details.</p>
+                {% endif %} <br> <br>
+            </form>
+        </div>
+        <p>Already have an account? <a href="{% url 'login' %}">Login</a></p>
+        {% if messages %}
+        {% for message in messages %}
+        <small {% if message.tags%} class="{{message.tags}}" {% endif %}>{{message}}</small>
+        {% endfor %}
+        {% endif %}
+    </div>
+
+</body>
+
+</html>

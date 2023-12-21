@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: white;
+        }
+
+        .blog-form-container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .blog-form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .blog-form label {
+            margin-bottom: 8px;
+        }
+
+        .blog-form input,
+        .blog-form textarea {
+            padding: 10px;
+            margin-bottom: 15px;
+            width: 100%;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .submit-button {
+            background-color: #333;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .submit-button:hover {
+            background-color: #555;
+        }
+
+        .logout-link {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+            color: #333;
+            text-decoration: none;
+        }
+
+        .logout-link:hover {
+            color: #555;
+        }
+    </style>
+</head>
+
+<body>
+    <strong><a href="{% url 'profile'%}">
+            < Back to profile</a></strong>
+
+    <div class="blog-form-container">
+        <h1>Create Blog Post</h1>
+        <form method="post" enctype="multipart/form-data" class="blog-form">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="submit-button">Submit</button>
+        </form>
+        <a href="{% url 'logout'%}" class="logout-link">Logout</a>
+    </div>
+</body>
+
+</html>
